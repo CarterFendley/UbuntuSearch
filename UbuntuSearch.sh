@@ -90,7 +90,8 @@ fi
 function getOperation() {
     log "Please select one of the operations below"
     log "   [1] Apt Search\n" "raw"
-    log "   [2] Exit\n" "raw"
+    log "   [2] Log Search\n" "raw"
+    log "   [3] Exit\n" "raw"
     log "Input the number of a valid operation:" "prompt"
 
     read answer
@@ -107,6 +108,9 @@ do
             ./modules/appSearch/appSearch.sh
             ;;
         2)
+            ./modules/logSearch.sh
+            ;;
+        3)
             log "Quiting UbuntuSearch" "success"
             exit 0
             ;;
