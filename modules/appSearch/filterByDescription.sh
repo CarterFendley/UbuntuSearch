@@ -59,5 +59,5 @@ do
 done
 printf "\n\n"
 
-cat modules/appSearch/installedPackagesDescriptions.list | grep --before-context=1 \'$filterStrings\'
+cat modules/appSearch/installedPackagesDescriptions.list | grep --before-context=1 --after-context=1 \'$filterStrings\' | more
 rm modules/appSearch/installedPackagesDescriptions.list
