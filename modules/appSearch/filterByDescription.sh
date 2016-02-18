@@ -45,6 +45,8 @@ while read line; do
     fi
 done < <(cat $filterFile)
 
+echo "$filterStrings"
+
 log "Generating description list " "nobreak"
 i=0
 sp="/-\|"
@@ -52,10 +54,10 @@ for app in $(dpkg-query --show | awk '{print $1}')
 do
     printf "\b${sp:i++%${#sp}:1}"
     while read description; do
-        printf "$app: $description\n\n" >> modules/appSearch/installedPackagesDescriptions.list
+        printf "$app:\n$description\n\n" >> modules/appSearch/installedPackagesDescriptions.list
     done < <(apt-cache show $app | grep Description-en:)
 done
 printf "\n\n"
 
-cat modules/appSearch/installedPackagesDescriptions.list | grep \'$filterStrings\'
+cat modules/appSearch/installedPackagesDescriptions.list | grep --before-context=1 \'$filterStrings\'
 rm modules/appSearch/installedPackagesDescriptions.list
